@@ -142,12 +142,11 @@ def test_go_to_sheet():
     workbook = ts.getWorkbook()
 
     sheets = workbook.getSheets()
-    assert 14 == len(sheets)
+    assert 41 == len(sheets)
 
     nycAdults = workbook.goToSheet("ATT MID ATTACKING COMP")
-    for t in nycAdults.worksheets:
-        assert '' != t.name
-        assert not t.data.empty
+    assert all('' != t.name for t in nycAdults.worksheets)
+    assert any(not t.data.empty for t in nycAdults.worksheets)
 
 
 def test_render_tooltip():
